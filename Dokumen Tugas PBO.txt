@@ -1,0 +1,8 @@
+Dokumen tubes PBO
+
+- usecase versi akhir
+- class diagram
+- activity diagram u/ setiap usecase
+- screenshot program
+- pembagian tugas secara detail
+- print hardcopy
