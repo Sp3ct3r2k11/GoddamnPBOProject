@@ -19,10 +19,16 @@
 
 ## Pembagian Tugas
 ### Reinardy
-- Tugas 1
+- Function Procedure yang diperlukan
+- Proses program
 
 ### Ryovaldi
-- Tugas 2
+- Connection Database
+- Data Access
+- Class
+- Proses Program
 
 ### Christian
-- Tugas 3
+- Buat GUI yang rapi dan terstruktur
+
+#### Ingat untuk saling membantu dan isi file ngide.txt kalo kepikiran algo tapi ga bisa bikinnya
