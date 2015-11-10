@@ -16,3 +16,8 @@
 - screenshot program
 - pembagian tugas secara detail
 - print hardcopy
+
+## Pembagian Tugas
+### Reinardy
+### Ryovaldi
+### Christian
