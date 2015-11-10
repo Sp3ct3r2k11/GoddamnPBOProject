@@ -7,3 +7,12 @@
 - Setiap update yang dibuat tolong POST di GITHUB
 - Jangan buat class yang ga perlu
 - Datbase SQL di export ke PC lalu POST juga di GITHUB
+
+# Dokumen tubes PBO
+
+- usecase versi akhir
+- class diagram
+- activity diagram u/ setiap usecase
+- screenshot program
+- pembagian tugas secara detail
+- print hardcopy
