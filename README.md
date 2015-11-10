@@ -19,5 +19,8 @@
 
 ## Pembagian Tugas
 ### Reinardy
+- Tugas 1
 ### Ryovaldi
+- Tugas 2
 ### Christian
+- Tugas 3
