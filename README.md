@@ -1,4 +1,15 @@
 # GoddamnPBOProject
+
+# What we're making
+
+  This project is for an assignment on making a GUI interface of an airline ticketing system with database connectivity using jdbc, connecting toward a MySQL database. GUI components are made with javax.swing and java.awt libraries.
+
+-------------------
+
+# Personal Team Notes (In Indonesian)
+
+# Notes
+
 - Selalu beri comment pada setiap proses biar yang laen ngerti
 - Kalo ada kodingan yang salah jangan langsung di delete di buat jadi comment dulu
 - Kalo ada saran atau ide untuk kodingan tapi ga bisa bikin masukin algo / idenya di file ngide.txt
