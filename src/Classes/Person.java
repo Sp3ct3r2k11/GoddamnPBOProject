@@ -1,28 +1,20 @@
+
 package Classes;
 
-import java.util.ArrayList;
-
 public class Person {
-    
     private String id;
-    private String pass;
-    private String name;
+    private String username;
+    private String password;
     private String email;
     private String telp;
     private String currentFCode;
-    private ArrayList <String> fCode = new ArrayList();
 
-    public Person() {
-    
-    }
-
-    public Person(String id, String pass, String name, String email, String telp, String currentFCode) {
+    public Person(String id, String username, String password, String email, String telp) {
         this.id = id;
-        this.pass = pass;
-        this.name = name;
+        this.username = username;
+        this.password = password;
         this.email = email;
         this.telp = telp;
-        this.currentFCode = null;
     }
 
     public String getId() {
@@ -33,20 +25,20 @@ public class Person {
         this.id = id;
     }
 
-    public String getPass() {
-        return pass;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -71,14 +63,6 @@ public class Person {
 
     public void setCurrentFCode(String currentFCode) {
         this.currentFCode = currentFCode;
-    }
-
-    public ArrayList<String> getfCode() {
-        return fCode;
-    }
-
-    public void setfCode(ArrayList<String> fCode) {
-        this.fCode = fCode;
     }
     
 }

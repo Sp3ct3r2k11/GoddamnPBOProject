@@ -1,3 +1,4 @@
+
 package Database;
 
 import Classes.*;
@@ -21,7 +22,7 @@ public class DataAccess {
     }
     
     public static void addFlight(Flight flght){
-        String query = "INSERT INTO flight VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO flight VALUES(?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement st = ConnectionManager.getConnection()
@@ -30,8 +31,9 @@ public class DataAccess {
             st.setString(2, flght.getPlaneCode());
             st.setString(3, flght.getPlaneName());
             st.setString(4, flght.getDestination());
-            st.setString(4, flght.getFlighTtime());
-            st.setString(5, "Waiting");
+            st.setString(5, flght.getFlightTime());
+            st.setString(6, flght.getStatus());
+            st.setInt(7, flght.getPrice());
 	    st.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,8 +77,8 @@ public class DataAccess {
             PreparedStatement st = ConnectionManager.getConnection()
                                         .prepareStatement(query);
             st.setString(1, prsn.getId());
-            st.setString(2, prsn.getName());
-            st.setString(3, prsn.getPass());
+            st.setString(2, prsn.getUsername());
+            st.setString(3, prsn.getPassword());
             st.setString(4, prsn.getEmail());
             st.setString(5, prsn.getTelp());
             st.setString(6, prsn.getCurrentFCode());
@@ -85,21 +87,5 @@ public class DataAccess {
             e.printStackTrace();
         }
     }
-    
-    //data access flight_history
-    
-    public static void addHistory(Person prsn, Flight flght){
-        String query = "INSERT INTO flight_history VALUES(?,?)";
-        
-        try {
-            PreparedStatement st = ConnectionManager.getConnection()
-                                        .prepareStatement(query);
-            st.setString(1, prsn.getId());
-            st.setString(2, flght.getFlightCode());
-            st.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+   
 }
