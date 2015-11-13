@@ -1,22 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author Ryo
- */
+
 public class ConnectionManager {
-    private static String server = "jdbc:mysql://localhost/tubes_pbo";
-	private static String username = "root";
-	private static String password = "";
+    private static final String server = "jdbc:mysql://localhost/tubes_pbo";
+	private static final String username = "root";
+	private static final String password = "";
 	private static Connection connection;
 	
 	public static Connection getConnection() {
