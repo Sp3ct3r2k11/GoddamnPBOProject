@@ -1,3 +1,4 @@
+
 package Database;
 
 import Classes.*;
@@ -30,7 +31,7 @@ public class DataAccess {
             st.setString(2, flght.getPlaneCode());
             st.setString(3, flght.getPlaneName());
             st.setString(4, flght.getDestination());
-            st.setString(4, flght.getFlighTtime());
+            st.setString(4, flght.getFlightTime());
             st.setString(5, "Waiting");
 	    st.execute();
         } catch (Exception e) {
@@ -75,8 +76,8 @@ public class DataAccess {
             PreparedStatement st = ConnectionManager.getConnection()
                                         .prepareStatement(query);
             st.setString(1, prsn.getId());
-            st.setString(2, prsn.getName());
-            st.setString(3, prsn.getPass());
+            st.setString(2, prsn.getUsername());
+            st.setString(3, prsn.getPassword());
             st.setString(4, prsn.getEmail());
             st.setString(5, prsn.getTelp());
             st.setString(6, prsn.getCurrentFCode());
