@@ -5,18 +5,17 @@
  */
 package gui;
 
-import java.awt.Color;
+import Database.*;
+import Classes.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.text.Document;
-
 
 public class LogIn extends JFrame{
 
@@ -47,6 +46,30 @@ public class LogIn extends JFrame{
         register = new JButton("Register");
         register.setBounds(125, 65, 100, 20);
         
+//        This part for calling button action listener
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String getUsername = username.getText();
+                String getPassword = password.getText();
+                
+                if(getUsername.equals("admin")&&getPassword.equals("admin123")){
+                    JOptionPane.showMessageDialog(null, "Admin Login Success!");
+                    new AdminPage();
+                    dispose();
+                }
+                else{
+                    if(!DataAccess.getPassanger(getUsername, getPassword)){
+                        JOptionPane.showMessageDialog(null, "Login Gagal! Periksa username dan password anda!");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Login Bergasil!\n Login Sebagai : "+getUsername);
+                        dispose();
+                        new Passanger();
+                    }
+                }
+            }
+        });
+        
 //        This part create Label for text
         JLabel user = new JLabel("Username");
         user.setBounds(8,8,100,20);
@@ -70,8 +93,12 @@ public class LogIn extends JFrame{
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
-//    public static void main(String[] args) {
-//        new LogIn();
-//    }
+    public static void checkingLogin(){
+        
+    }
+    
+    public static void main(String[] args) {
+        new LogIn();
+    }
     
 }

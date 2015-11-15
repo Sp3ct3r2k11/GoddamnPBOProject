@@ -8,7 +8,10 @@ public class Person {
     private String email;
     private String telp;
     private String currentFCode;
-
+    
+    public Person() {
+    }
+    
     public Person(String id, String username, String password, String email, String telp) {
         this.id = id;
         this.username = username;

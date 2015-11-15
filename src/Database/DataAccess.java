@@ -3,6 +3,8 @@ package Database;
 
 import Classes.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 public class DataAccess {
     
     //data access flight
@@ -41,6 +43,35 @@ public class DataAccess {
     }
     
     //data access passanger
+    
+    public static boolean getPassanger(String username,String password){
+        String query = "SELECT * FROM person WHERE name=? and pass=?";
+        try {
+            PreparedStatement st = ConnectionManager.getConnection()
+                                    .prepareStatement(query);
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            
+            Person p = new Person();
+            p.setId(rs.getString(1)); 
+            p.setUsername(rs.getString(2)); 
+            p.setPassword(rs.getString(3));
+            p.setEmail(rs.getString(4)); 
+            p.setTelp(rs.getString(5));
+            p.setCurrentFCode(rs.getString(6));
+            
+            if(p.getId() == null){
+                return false;
+            }else{
+                return true;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
     public static void setFlightCode(String id,String newFlightCode){
         String query = "UPDATE person SET current_fcode=? WHERE id=?";
