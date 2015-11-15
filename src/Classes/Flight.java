@@ -10,7 +10,10 @@ public class Flight {
     private String FlightTime;
     private String Status;
     private int price;
-
+    
+    public Flight() {
+    }
+    
     public Flight(String FlightCode, String PlaneCode, String PlaneName, String Destination, String FlightTime, String Status, int price) {
         this.FlightCode = FlightCode;
         this.PlaneCode = PlaneCode;
