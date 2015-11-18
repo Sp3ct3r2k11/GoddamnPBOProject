@@ -3,8 +3,11 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -20,26 +23,48 @@ public class AdminPage extends JFrame{
     JTextField search = new JTextField(10);
     JButton bsearch = new JButton("Search");
     JButton bpostpone = new JButton("Postpone");
-    JButton bcancel = new JButton("Cancel");
+    JButton bcancel = new JButton("Cancel Flight");
     
-    DefaultTableModel model = new DefaultTableModel();
-    JTable table = new JTable(model);
+    //DefaultTableModel model = new DefaultTableModel();
+    JTable table;
     
     
     public AdminPage(){
-    
+        setTitle("Admin");
+        
         badd.setBounds(8, 8, 70, 20);
         bsearch.setBounds(208-4, 8, 75, 20);
         bpostpone.setBounds(8, 405, 90, 30);
         
+        badd.addActionListener(new ActionListener() {
+            // add flight button action
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Please Insert New Flight");
+                dispose();
+                new Add();
+            }
+        });
+        
         search.setBounds(86,8,110,20);
         
-        table.setBounds(300, 58, 300, table.getRowHeight());
+        table.setBounds(30, 58, 700, 300);
         
         logout.add(blogout);
         logout.setBounds(795, 8, 80, 30);
+        blogout.addActionListener(new ActionListener() {
+            // logout button action
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Admin Logout!");
+                dispose();
+                new LogIn();
+            }
+        });
         
         bcancel.setBounds(106, 405, 90, 30);
+        
+        
         
         base.setSize(900, 500);
         base.add(logout);

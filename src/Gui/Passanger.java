@@ -1,8 +1,11 @@
 package gui;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -25,7 +28,9 @@ public class Passanger extends JFrame{
     
     
     public Passanger(){
-    
+        
+        setTitle("Passanger");
+        
         bProfile.setBounds(8, 8, 70+5, 20);
         bsearch.setBounds(8+110+8, 8+20+8, 75, 20);
         bCurrentFlight.setBounds(8+70+5+8, 8, 120, 20);
@@ -36,6 +41,15 @@ public class Passanger extends JFrame{
         
         logout.add(blogout);
         logout.setBounds(795-150, 8, 80, 30);
+        blogout.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                JOptionPane.showMessageDialog(null, "User Logout");
+                new LogIn();
+            }
+        });
         
         bBook.setBounds(8, 405, 90, 30);
         

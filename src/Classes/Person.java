@@ -2,30 +2,22 @@
 package Classes;
 
 public class Person {
-    private String id;
+    
     private String username;
     private String password;
     private String email;
     private String telp;
     private String currentFCode;
-    
+
     public Person() {
     }
     
     public Person(String id, String username, String password, String email, String telp) {
-        this.id = id;
+        
         this.username = username;
         this.password = password;
         this.email = email;
         this.telp = telp;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUsername() {

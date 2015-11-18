@@ -10,7 +10,7 @@ public class Flight {
     private String FlightTime;
     private String Status;
     private int price;
-    
+
     public Flight() {
     }
     

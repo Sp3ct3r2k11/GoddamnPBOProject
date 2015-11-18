@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 
 public class ConnectionManager {
-    private static final String server = "jdbc:mysql://localhost/tubes_pbo";
+        private static final String server = "jdbc:mysql://localhost/tubes_pbo";
 	private static final String username = "root";
 	private static final String password = "";
 	private static Connection connection;

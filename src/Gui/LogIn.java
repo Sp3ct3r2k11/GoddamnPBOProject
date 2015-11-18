@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gui;
 
 import Database.*;
@@ -45,6 +41,16 @@ public class LogIn extends JFrame{
         login.setBounds(20, 65, 100, 20);
         register = new JButton("Register");
         register.setBounds(125, 65, 100, 20);
+        
+        register.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Welcome our new member!");
+                dispose();
+                new Register();
+            }
+        });
         
 //        This part for calling button action listener
         login.addActionListener(new ActionListener() {
@@ -91,10 +97,6 @@ public class LogIn extends JFrame{
         add(base);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }
-    
-    public static void checkingLogin(){
-        
     }
     
     public static void main(String[] args) {

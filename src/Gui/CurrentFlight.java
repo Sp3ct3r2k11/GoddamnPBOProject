@@ -24,7 +24,7 @@ public class CurrentFlight extends JFrame{
     JButton bcancel;
 
     public CurrentFlight() {
-        super("Add Flight");
+        super("Current Flight");
                 
         base = new JPanel(null);
         base.setSize(270, 250);
