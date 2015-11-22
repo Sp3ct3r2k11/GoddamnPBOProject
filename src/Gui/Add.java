@@ -6,10 +6,15 @@
  */
 package gui;
 
+import Classes.*;
+import Database.DataAccess;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -46,7 +51,7 @@ public class Add extends JFrame{
         jPlaneName.setBounds(150,58,100,20);
         jDestination = new JTextField(10);
         jDestination.setBounds(150,83,100,20);
-        jFlightTime = new JTextField(10);
+        jFlightTime = new JTextField("YYYY-MM-DD HH:MM:SS");
         jFlightTime.setBounds(150,108,100,20);
         jPrice = new JTextField(10);
         jPrice.setBounds(150, 108+(33-8), 100, 20);
@@ -84,6 +89,34 @@ public class Add extends JFrame{
         baccept.setBounds(80-50, 195, 100, 20);
         bcancel = new JButton("Cancel");
         bcancel.setBounds(80-50+100+8, 195, 100, 20);
+        bcancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new AdminPage();
+            }
+        });
+        
+        baccept.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jFlightCode.getText().equalsIgnoreCase("") || jPlaneCode.getText().equalsIgnoreCase("") || jPlaneName.getText().equalsIgnoreCase("") || jDestination.getText().equalsIgnoreCase("") || jPrice.getText().equalsIgnoreCase("") || jFlightTime.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "Data Cannot Be Blank!");
+                }else{    
+                    Flight f = new Flight();
+                    f.setFlightCode(jFlightCode.getText());
+                    f.setPlaneCode(jPlaneCode.getText());
+                    f.setPlaneName(jPlaneName.getText());
+                    f.setDestination(jDestination.getText());
+                    f.setFlightTime(jFlightTime.getText());
+                    f.setStatus("ready");
+                    f.setPrice(Integer.parseInt(jPrice.getText()));
+                    DataAccess.addFlight(f);
+                }
+            }
+        });
         
 //        This part add the checkbox and button to the base
         base.add(bcancel);
@@ -97,8 +130,8 @@ public class Add extends JFrame{
         add(base);
     }
     
-    public static void main(String[] args) {
-        new Add();
-    }
+//    public static void main(String[] args) {
+//        new Add();
+//    }
     
 }

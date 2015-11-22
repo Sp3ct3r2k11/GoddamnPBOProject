@@ -1,72 +1,85 @@
+
 package Classes;
 
+
 public class Flight {
-    
-    private String flightCode;
-    private String planeCode;
-    private String planeName;
-    private String destination;
-    private String flighTtime;
-    private String estimatedArrival;
+    private String FlightCode;
+    private String PlaneCode;
+    private String PlaneName;
+    private String Destination;
+    private String FlightTime;
+    private String Status;
+    private int price;
 
     public Flight() {
     }
-
-    public Flight(String flightCode, String planeCode, String planeName, String destination, String flighTtime, String estimatedArrival) {
-        this.flightCode = flightCode;
-        this.planeCode = planeCode;
-        this.planeName = planeName;
-        this.destination = destination;
-        this.flighTtime = flighTtime;
-        this.estimatedArrival = estimatedArrival;
+    
+    public Flight(String FlightCode, String PlaneCode, String PlaneName, String Destination, String FlightTime, String Status, int price) {
+        this.FlightCode = FlightCode;
+        this.PlaneCode = PlaneCode;
+        this.PlaneName = PlaneName;
+        this.Destination = Destination;
+        this.FlightTime = FlightTime;
+        this.Status = Status;
+        this.price = price;
     }
 
     public String getFlightCode() {
-        return flightCode;
+        return FlightCode;
     }
 
-    public void setFlightCode(String flightCode) {
-        this.flightCode = flightCode;
+    public void setFlightCode(String FlightCode) {
+        this.FlightCode = FlightCode;
     }
 
     public String getPlaneCode() {
-        return planeCode;
+        return PlaneCode;
     }
 
-    public void setPlaneCode(String planeCode) {
-        this.planeCode = planeCode;
+    public void setPlaneCode(String PlaneCode) {
+        this.PlaneCode = PlaneCode;
     }
 
     public String getPlaneName() {
-        return planeName;
+        return PlaneName;
     }
 
-    public void setPlaneName(String planeName) {
-        this.planeName = planeName;
+    public void setPlaneName(String PlaneName) {
+        this.PlaneName = PlaneName;
     }
 
     public String getDestination() {
-        return destination;
+        return Destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public void setDestination(String Destination) {
+        this.Destination = Destination;
     }
 
-    public String getFlighTtime() {
-        return flighTtime;
+    public String getFlightTime() {
+        return FlightTime;
     }
 
-    public void setFlighTtime(String flighTtime) {
-        this.flighTtime = flighTtime;
+    public void setFlightTime(String FlightTime) {
+        this.FlightTime = FlightTime;
     }
 
-    public String getEstimatedArrival() {
-        return estimatedArrival;
+    public String getStatus() {
+        return Status;
     }
 
-    public void setEstimatedArrival(String estimatedArrival) {
-        this.estimatedArrival = estimatedArrival;
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    
+    
     
 }

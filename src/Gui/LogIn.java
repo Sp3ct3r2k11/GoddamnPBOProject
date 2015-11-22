@@ -1,25 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gui;
 
-import java.awt.Color;
+import Database.*;
+import Classes.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.text.Document;
-
 
 public class LogIn extends JFrame{
-
+    
+    Person p = new Person();
     JPanel base;
     JTextField username;
     JTextField password;
@@ -47,6 +43,43 @@ public class LogIn extends JFrame{
         register = new JButton("Register");
         register.setBounds(125, 65, 100, 20);
         
+        register.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Welcome our new member!");
+                dispose();
+                new Register();
+            }
+        });
+        
+//        This part for calling button action listener
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String getUsername = username.getText();
+                String getPassword = password.getText();
+                
+                if(getUsername.equals("admin")&&getPassword.equals("admin123")){
+                    JOptionPane.showMessageDialog(null, "Admin Login Success!");
+                    new AdminPage();
+                    dispose();
+                }
+                else{
+                    if(!DataAccess.getPassanger(getUsername, getPassword)){
+                        JOptionPane.showMessageDialog(null, "Login Failed! Please insert a correct Username and Password!");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Login Success!\n Login As : "+getUsername);
+                        p=DataAccess.getPassangerData(getUsername, getPassword);
+                        System.out.println(p.getUsername()+p.getPassword());
+                        Passanger.getUser(p.getUsername(),p.getPassword(),p.getEmail(),p.getTelp(),p.getCurrentFCode());
+                        dispose();
+                        new Passanger();
+                    }
+                }
+            }
+        });
+        
 //        This part create Label for text
         JLabel user = new JLabel("Username");
         user.setBounds(8,8,100,20);
@@ -70,8 +103,8 @@ public class LogIn extends JFrame{
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
-//    public static void main(String[] args) {
-//        new LogIn();
-//    }
+    public static void main(String[] args) {
+        new LogIn();
+    }
     
 }

@@ -5,11 +5,16 @@
  */
 package gui;
 
+import Classes.Person;
+import Database.DataAccess;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -85,6 +90,33 @@ public class Register extends JFrame{
         Register = new JButton("Register");
         Register.setBounds(80, 195, 100, 20);
         
+        Register.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //checking blank data
+                if(Username.getText().equalsIgnoreCase("") || Password.getText().equalsIgnoreCase("") || Re_Password.getText().equalsIgnoreCase("") || Jemail.getText().equalsIgnoreCase("") || Jphone.getText().equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "Data cannot be blank");
+                }else if(!Password.getText().equals(Re_Password.getText())){
+                    //checking password confirmation
+                    JOptionPane.showMessageDialog(null, "Wrong password confirmation");
+                }else if(!Accept.isSelected()){
+                    //checking checkbox of lincese and agreement
+                    JOptionPane.showMessageDialog(null, "Please accept our lincese and agreement");
+                }else{
+                    Person pers = new Person();
+                    pers.setUsername(Username.getText());
+                    pers.setPassword(Password.getText());
+                    pers.setTelp(Jphone.getText());
+                    pers.setEmail(Jemail.getText());
+                    pers.setCurrentFCode(null);
+                    DataAccess.addPassanger(pers);
+                    dispose();
+                    new LogIn();
+                }
+            }
+        });
+        
 //        This part add the checkbox and button to the base
         base.add(JAccept);
         base.add(Accept);
@@ -97,7 +129,7 @@ public class Register extends JFrame{
         setVisible(true);
         add(base);
     }
-    
+        
 //    public static void main(String[] args) {
 //        new Register();
 //    }
