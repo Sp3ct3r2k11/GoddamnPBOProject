@@ -14,7 +14,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LogIn extends JFrame{
-
+    
+    Person p = new Person();
     JPanel base;
     JTextField username;
     JTextField password;
@@ -66,9 +67,12 @@ public class LogIn extends JFrame{
                 }
                 else{
                     if(!DataAccess.getPassanger(getUsername, getPassword)){
-                        JOptionPane.showMessageDialog(null, "Login Gagal! Periksa username dan password anda!");
+                        JOptionPane.showMessageDialog(null, "Login Failed! Please insert a correct Username and Password!");
                     }else{
-                        JOptionPane.showMessageDialog(null, "Login Bergasil!\n Login Sebagai : "+getUsername);
+                        JOptionPane.showMessageDialog(null, "Login Success!\n Login As : "+getUsername);
+                        p=DataAccess.getPassangerData(getUsername, getPassword);
+                        System.out.println(p.getUsername()+p.getPassword());
+                        Passanger.getUser(p.getUsername(),p.getPassword(),p.getEmail(),p.getTelp(),p.getCurrentFCode());
                         dispose();
                         new Passanger();
                     }

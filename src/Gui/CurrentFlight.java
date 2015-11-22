@@ -5,10 +5,14 @@
  */
 package gui;
 
+import Classes.Flight;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -22,7 +26,8 @@ public class CurrentFlight extends JFrame{
     JPanel base;
     JButton bOke;
     JButton bcancel;
-
+    static Flight flight;
+    
     public CurrentFlight() {
         super("Current Flight");
                 
@@ -33,30 +38,63 @@ public class CurrentFlight extends JFrame{
         
         
 //        This part create Label for text
-        JLabel passID = new JLabel("Pass ID");
-        passID.setBounds(8,8,100,20);
-        JLabel flightCode = new JLabel("Flight Code");
-        flightCode.setBounds(8,33,100,20);
-        JLabel flightTime = new JLabel("Flight Time");
-        flightTime.setBounds(8, 58, 120, 20);
-        JLabel destination = new JLabel("Destination");
-        destination.setBounds(8,83,100,20);
-        JLabel price = new JLabel("Price Total");
-        price.setBounds(8,108,100,20);
+        JLabel flightCode = new JLabel("Flight Code : \t"+flight.getFlightCode());
+        flightCode.setBounds(8,8,250,20);
+        JLabel planeCode = new JLabel("Plane Code : \t"+flight.getPlaneCode());
+        planeCode.setBounds(8,33,250,20);
+        JLabel planeName = new JLabel("Plane Name : \t"+flight.getPlaneName());
+        planeName.setBounds(8, 58, 250, 20);
+        JLabel destination = new JLabel("Destination : \t"+flight.getDestination());
+        destination.setBounds(8,83,250,20);
+        JLabel flightTime = new JLabel("Flight Time : \t"+flight.getFlightTime());
+        flightTime.setBounds(8,108,250,20);
+        JLabel status = new JLabel("Status : \t"+flight.getStatus());
+        status.setBounds(8,136,250,20);
+        JLabel price = new JLabel("Price : \t"+flight.getPrice());
+        price.setBounds(8,161,250,20);
         
-        base.add(passID);
         base.add(flightCode);
-        base.add(flightTime);
+        base.add(planeCode);
+        base.add(planeName);
         base.add(destination);
+        base.add(flightTime);
+        base.add(status);
         base.add(price);
               
 //        This part create the register button
         bOke = new JButton("OK");
         bOke.setBounds(80-50, 195, 70, 20);
+        
+        bOke.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Passanger();
+            }
+        });
+        
         bcancel = new JButton("Cancel Flight");
         bcancel.setBounds(80-50+70+8, 195, 100+20, 20);
         
-//        This part add the checkbox and button to the base
+        bcancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int pil = JOptionPane.showConfirmDialog(null, "Are you sure to Cancel this Flight?", "Confirmation", 0);
+                if(pil == 0){
+                    String name = Passanger.passanger.getUsername();
+                    String pass = Passanger.passanger.getPassword();
+                    Database.DataAccess.setFlightCode(name, pass, null);
+                    JOptionPane.showMessageDialog(null, "Flight Canceled!", "Message", 1);
+                    Passanger.passanger.setCurrentFCode("-");
+                    dispose();
+                    new Passanger();
+                }
+            }
+        });
+        
+//        This part add the button to the base
         base.add(bcancel);
         base.add(bOke);
         
@@ -68,9 +106,19 @@ public class CurrentFlight extends JFrame{
         add(base);
     }
     
-    public static void main(String[] args) {
-        new CurrentFlight();
+//    public static void main(String[] args) {
+//        new CurrentFlight();
+//    }
+    
+    public static void getFlight(String a,String b, String c, String d, String e, String f, int g){
+        flight = new Flight();
+        flight.setFlightCode(a);
+        flight.setPlaneCode(b);
+        flight.setPlaneName(c);
+        flight.setDestination(d);
+        flight.setFlightTime(e);
+        flight.setStatus(f);
+        flight.setPrice(g);
     }
     
-        
 }

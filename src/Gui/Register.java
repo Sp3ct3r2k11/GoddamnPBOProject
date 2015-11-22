@@ -130,7 +130,7 @@ public class Register extends JFrame{
         add(base);
     }
         
-    public static void main(String[] args) {
-        new Register();
-    }
+//    public static void main(String[] args) {
+//        new Register();
+//    }
 }

@@ -130,8 +130,8 @@ public class Add extends JFrame{
         add(base);
     }
     
-    public static void main(String[] args) {
-        new Add();
-    }
+//    public static void main(String[] args) {
+//        new Add();
+//    }
     
 }

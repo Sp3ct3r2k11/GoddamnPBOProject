@@ -20,7 +20,7 @@ public class Flight {
         this.PlaneName = PlaneName;
         this.Destination = Destination;
         this.FlightTime = FlightTime;
-        this.Status = "Ready";
+        this.Status = Status;
         this.price = price;
     }
 

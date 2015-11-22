@@ -13,7 +13,7 @@ public class DataAccess {
     
     public static List<Flight> showflightUser(){
         List<Flight> flght = new ArrayList<Flight>();
-        String query = "SELECT code,planecode,planename,destination,flighttime,ticket_price FROM flight WHERE status='ready'";
+        String query = "SELECT code,planecode,planename,destination,flighttime,ticketprice FROM flight WHERE status='ready' or status='delayed' ORDER BY flighttime";
         
         try {
             PreparedStatement st = ConnectionManager.getConnection().
@@ -37,7 +37,7 @@ public class DataAccess {
     
     public static List<Flight> showflightAdmin(){
         List<Flight> flght = new ArrayList<Flight>();
-        String query = "SELECT * FROM flight";
+        String query = "SELECT * FROM flight ORDER BY flighttime";
         
         try {
             PreparedStatement st = ConnectionManager.getConnection().
@@ -60,17 +60,40 @@ public class DataAccess {
         return flght;
     }
     
-    public static void postpone(String newTime,String flightId){
-        String query = "UPDATE flight SET flighttime=? WHERE code=?";
+    public static void cancel(String flightId){
+        String query = "UPDATE flight SET status='canceled' WHERE code=?";
         
         try {
             PreparedStatement st = ConnectionManager.getConnection()
-					.prepareStatement(query);
+                                        .prepareStatement(query);
+            st.setString(1, flightId);
+            st.execute();
+            JOptionPane.showMessageDialog(null, "The Flight "+flightId+" has canceled!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void postpone(String newTime,String flightId){
+        String query1 = "UPDATE flight SET flighttime=? WHERE code=?";
+        String query2 = "UPDATE flight SET status='delayed' WHERE code=?";
+        
+        try {
+            PreparedStatement st = ConnectionManager.getConnection()
+					.prepareStatement(query1);
             st.setString(1, newTime);
             st.setString(2, flightId);
             st.execute();
+            
+            PreparedStatement st2 = ConnectionManager.getConnection()
+                                        .prepareStatement(query2);
+            st2.setString(1, flightId);
+            st2.execute();
+            
+            JOptionPane.showMessageDialog(null, "Flight Delayed!");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Wrong date & time format!");
+            JOptionPane.showMessageDialog(null, "Wrong date & time Format!", "ERROR!",2);
         }
     }
     
@@ -94,7 +117,51 @@ public class DataAccess {
 	}
     }
     
+    public static Flight getFlight(String code){
+        Flight f = new Flight();
+        String query = "SELECT * FROM flight WHERE code=?";
+        try {
+            PreparedStatement st = ConnectionManager.getConnection()
+                                    .prepareStatement(query);
+            st.setString(1, code);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            f.setFlightCode(rs.getString(1));
+            f.setPlaneCode(rs.getString(2));
+            f.setPlaneName(rs.getString(3));
+            f.setDestination(rs.getString(4));
+            f.setFlightTime(rs.getString(5));
+            f.setStatus(rs.getString(6));
+            f.setPrice(rs.getInt(7));
+        } catch (Exception e) {
+            System.out.println("Flight Not Found!");
+            JOptionPane.showMessageDialog(null, "Flight Not Found!","Error!",2);
+        }
+        return f;
+    } 
+    
     //data access passanger
+    
+    public static Person getPassangerData(String username,String password){
+        Person p = new Person();
+        String query = "SELECT * FROM person WHERE name=? and pass=?";
+        try {
+            PreparedStatement st = ConnectionManager.getConnection()
+                                    .prepareStatement(query);
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            rs.next();  
+            p.setUsername(rs.getString(1)); 
+            p.setPassword(rs.getString(2));
+            p.setEmail(rs.getString(3)); 
+            p.setTelp(rs.getString(4));
+            p.setCurrentFCode(rs.getString(5));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
     
     public static boolean getPassanger(String username,String password){
         String query = "SELECT * FROM person WHERE name=? and pass=?";
@@ -119,20 +186,22 @@ public class DataAccess {
             }
             
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Username & Password not Found!");
             return false;
         }
     }
     
-    public static void setFlightCode(String id,String newFlightCode){
-        String query = "UPDATE person SET current_fcode=? WHERE id=?";
+    public static void setFlightCode(String name,String pass,String newFlightCode){
+        String query = "UPDATE person SET current_fcode=? WHERE name=? and pass=?";
         
         try {
             PreparedStatement st = ConnectionManager.getConnection()
-                                        .prepareCall(query);
+                                        .prepareStatement(query);
             st.setString(1, newFlightCode);
-            st.setString(2, id);
+            st.setString(2, name);
+            st.setString(3, pass);
             st.execute();
+            System.out.println("Flight Code Changed!");
         } catch (Exception e) {
             e.printStackTrace();
         }
