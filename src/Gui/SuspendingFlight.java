@@ -94,8 +94,8 @@ public class SuspendingFlight extends JFrame{
         flight.setPrice(g);
     }
     
-//    public static void main(String[] args) {
-//        new SuspendingFlight();
-//    }
+    public static void main(String[] args) {
+        new SuspendingFlight();
+    }
     
 }
