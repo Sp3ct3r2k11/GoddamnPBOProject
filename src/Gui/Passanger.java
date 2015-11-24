@@ -24,6 +24,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class Passanger extends JFrame{
     
+<<<<<<< HEAD
+=======
+    boolean opened = true;
+>>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
     
     static Person passanger;
     JPanel base = new JPanel(null);
@@ -45,6 +49,7 @@ public class Passanger extends JFrame{
     
     public Passanger(){
         
+<<<<<<< HEAD
         Gui.CountDown hitung = LogIn.getHitung();
         
         hitung.setBounds(400, 450, 350, 20);
@@ -67,6 +72,20 @@ public class Passanger extends JFrame{
         });
         
         bCurrentFlight.setBounds(8+70+5+8, 8, 120, 20);
+=======
+        waktu hitung = new waktu();
+        
+        hitung.setBounds(400, 450, 350, 20);
+        
+        Thread mundur = new Thread(hitung);
+        mundur.start();
+        
+        setTitle("Passanger");
+        
+        bProfile.setBounds(8, 8, 70+5, 20);
+        bsearch.setBounds(8+110+8, 8+20+8, 75, 20);
+        bCurrentFlight.setBounds(8+70+5+8, 8, 110, 20);
+>>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
         
         bCurrentFlight.addActionListener(new ActionListener() {
 
@@ -99,22 +118,23 @@ public class Passanger extends JFrame{
         
         search.setBounds(8,8+20+8,210,20);
         spTable = new JScrollPane(table);
-        spTable.setBounds(8, 58+8, 900-200, 300);
+        spTable.setBounds(8+16, 58+8, 900-200, 300);
         showTable(DataAccess.showflightUser());
         
         logout.add(blogout);
-        logout.setBounds(795-150, 8, 80, 30);
+        logout.setBounds(795-150, 8, 80, 20);
         blogout.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 JOptionPane.showMessageDialog(null, "User Logout");
+                opened=false;
                 new LogIn();
             }
         });
         
-        bBook.setBounds(8, 405, 90, 30);
+        bBook.setBounds(8, 405, 70, 20);
         bBook.addActionListener(new ActionListener() {
 
             @Override
@@ -154,12 +174,21 @@ public class Passanger extends JFrame{
         add(base);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+<<<<<<< HEAD
         
+=======
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                opened = false;
+            }
+        });
+>>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
     }
     
-//    public static void main(String[] args) {
-//        new Passanger();
-//    }
+    public static void main(String[] args) {
+        new Passanger();
+    }
     
     public static void getUser(String a,String b,String c,String d,String e){
         passanger = new Person();
@@ -195,5 +224,34 @@ public class Passanger extends JFrame{
     }
    
     
+<<<<<<< HEAD
 
+=======
+    private String now(){
+        Calendar time = Calendar.getInstance();
+        int days = time.get(Calendar.DAY_OF_MONTH);
+        int hours = time.get(Calendar.HOUR_OF_DAY);
+        int minute = time.get(Calendar.MINUTE);
+        int second = time.get(Calendar.SECOND);
+        return "Next flight :"+days+" days "+hours+" hours "+minute+" minutes "+second+" seconds "+"left.";
+    }
+    
+    private class waktu extends JLabel implements Runnable{
+        
+        @Override
+        public void run() {
+
+            while(opened){
+                try {
+                    setText(now());
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Passanger.class.getName()).log(Level.SEVERE, null, ex);
+                }                
+            }
+            
+        }
+        
+    }
+>>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
 }
