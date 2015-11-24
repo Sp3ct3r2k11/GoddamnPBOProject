@@ -33,7 +33,7 @@ public class Register extends JFrame{
     JTextField Jphone;
     JButton Register;
     JCheckBox Accept;
-
+    JButton Cancel;
         public Register()
     {
 //        This part set the title
@@ -88,7 +88,19 @@ public class Register extends JFrame{
         
 //        This part create the register button
         Register = new JButton("Register");
-        Register.setBounds(80, 195, 100, 20);
+        Register.setBounds(10+20, 195, 100, 20);
+        
+        Cancel = new JButton("Cancel");
+        Cancel.setBounds(120+20, 195, 100, 20);
+        
+        Cancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LogIn();
+            }
+        });
         
         Register.addActionListener(new ActionListener() {
 
@@ -121,16 +133,17 @@ public class Register extends JFrame{
         base.add(JAccept);
         base.add(Accept);
         base.add(Register);
+        base.add(Cancel);
         
 //        this part set the frame
         setResizable(false);
         setSize(base.getSize());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         add(base);
     }
         
-//    public static void main(String[] args) {
-//        new Register();
-//    }
+    public static void main(String[] args) {
+        new Register();
+    }
 }

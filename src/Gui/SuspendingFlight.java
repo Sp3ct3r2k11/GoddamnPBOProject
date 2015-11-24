@@ -78,7 +78,7 @@ public class SuspendingFlight extends JFrame{
         add(base);
         setSize(base.getSize());
         setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         
     }

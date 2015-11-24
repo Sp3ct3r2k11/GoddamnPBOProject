@@ -49,7 +49,7 @@ public class CurrentFlight extends JFrame{
         JLabel flightTime = new JLabel("Flight Time : \t"+flight.getFlightTime());
         flightTime.setBounds(8,108,250,20);
         JLabel status = new JLabel("Status : \t"+flight.getStatus());
-        status.setBounds(8,136,250,20);
+        status.setBounds(8,108+25,250,20);
         JLabel price = new JLabel("Price : \t"+flight.getPrice());
         price.setBounds(8,161,250,20);
         
@@ -101,7 +101,7 @@ public class CurrentFlight extends JFrame{
 //        this part set the frame
         setResizable(false);
         setSize(base.getSize());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         add(base);
     }

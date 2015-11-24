@@ -3,6 +3,7 @@ package gui;
 
 import Database.*;
 import Classes.*;
+import Gui.CountDown;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -14,14 +15,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LogIn extends JFrame{
-    
+
     Person p = new Person();
     JPanel base;
     JTextField username;
     JTextField password;
     JButton login;
     JButton register;
-    
+    static Gui.CountDown hitung = new Gui.CountDown();
     public LogIn() 
     {
 //        This is the title of this Frame  
@@ -30,6 +31,10 @@ public class LogIn extends JFrame{
 //        This part create the null panel as the base
         base = new JPanel(null);
         base.setSize(250, 122);
+        
+//        This part make thread
+        Thread thread = new Thread(hitung);
+        thread.start();
         
 //        This part create the textField
         username = new JTextField(10);
@@ -100,11 +105,22 @@ public class LogIn extends JFrame{
         setResizable(false);
         add(base);
         setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public static CountDown getHitung() {
+        return hitung;
+    }
+
+    public static void setHitung(CountDown hitung) {
+        LogIn.hitung = hitung;
     }
     
     public static void main(String[] args) {
         new LogIn();
     }
+
+    
+    
     
 }

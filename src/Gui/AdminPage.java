@@ -24,7 +24,7 @@ public class AdminPage extends JFrame{
     JPanel logout = new JPanel(new GridLayout(1,1));
     JButton blogout = new JButton("Logout");
     JButton badd = new JButton("Add");
-    JTextField search = new JTextField(10);
+    JTextField search = new JTextField("Destination Search");
     JButton bsearch = new JButton("Search");
     JButton bpostpone = new JButton("Postpone");
     JButton bcancel = new JButton("Cancel Flight");
@@ -38,8 +38,25 @@ public class AdminPage extends JFrame{
     public AdminPage(){
         setTitle("Admin");
         
+        Gui.CountDown hitung = LogIn.getHitung();
+        
+        hitung.setBounds(500, 450, 360, 20);
+        
         badd.setBounds(8, 8, 70, 20);
-        bsearch.setBounds(208-4, 8, 75, 20);
+        bsearch.setBounds(308, 8, 75, 20);
+        
+        bsearch.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!search.getText().isEmpty()){
+                    showTable(DataAccess.showSearchAdmin("%"+search.getText()+"%"));
+                }else{
+                    showTable(DataAccess.showflightAdmin());
+                }
+            }
+        });
+        
         bpostpone.setBounds(8, 405, 90, 30);
         
         bpostpone.addActionListener(new ActionListener() {
@@ -52,10 +69,18 @@ public class AdminPage extends JFrame{
                 }else{
                     selectedCode = (String)table.getModel().getValueAt(table.getSelectedRow(), 0);
                     System.out.println(selectedCode);
-                    f=DataAccess.getFlight(selectedCode);
-                    SuspendingFlight.getFlight(f.getFlightCode(), f.getPlaneCode(), f.getPlaneName(), f.getDestination(), f.getFlightTime(), f.getStatus(), f.getPrice());
-                    dispose();
-                    new SuspendingFlight();
+                    String selectedStatus = new String();
+                    selectedStatus = (String)table.getModel().getValueAt(table.getSelectedRow(), 5);
+                    if(selectedStatus.equals("canceled")){
+                        JOptionPane.showMessageDialog(null, "Cannot Postpone a Canceled Flight!", "ERROR", 2);
+                    }else if(selectedStatus.equals("take_off")){
+                        JOptionPane.showMessageDialog(null, "Cannot Postpone a Taken Off FLoght!","ERROR",2);
+                    }else{
+                        f=DataAccess.getFlight(selectedCode);
+                        SuspendingFlight.getFlight(f.getFlightCode(), f.getPlaneCode(), f.getPlaneName(), f.getDestination(), f.getFlightTime(), f.getStatus(), f.getPrice());
+                        dispose();
+                        new SuspendingFlight();    
+                    }
                 }
             }
         });
@@ -70,10 +95,10 @@ public class AdminPage extends JFrame{
             }
         });
         
-        search.setBounds(86,8,110,20);
+        search.setBounds(86,8,210,20);
         
         spTable = new JScrollPane(table);
-        spTable.setBounds(30, 58, 700, 300);
+        spTable.setBounds(30, 58, 830, 300);
         showTable(DataAccess.showflightAdmin());
         
         table.getSelectedRow();
@@ -126,11 +151,12 @@ public class AdminPage extends JFrame{
         base.add(bpostpone);
         base.add(spTable);
         base.add(bcancel);
+        base.add(hitung);
         
         setResizable(false);
         setSize(base.getSize());
         add(base);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
     

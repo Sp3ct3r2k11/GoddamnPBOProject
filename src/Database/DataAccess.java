@@ -4,7 +4,9 @@ package Database;
 import Classes.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 public class DataAccess {
@@ -18,6 +20,32 @@ public class DataAccess {
         try {
             PreparedStatement st = ConnectionManager.getConnection().
                                     prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Flight f = new Flight();
+                f.setFlightCode(rs.getString(1));
+                f.setPlaneCode(rs.getString(2));
+                f.setPlaneName(rs.getString(3));
+                f.setDestination(rs.getString(4));
+                f.setFlightTime(rs.getString(5));
+                f.setPrice(rs.getInt(6));
+                flght.add(f);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flght;
+    }
+    
+    public static List<Flight> showSearchUser(String like){
+        List<Flight> flght = new ArrayList<Flight>();
+        String query = "SELECT code,planecode,planename,destination,flighttime,ticketprice FROM flight WHERE destination LIKE ? and status='ready' or destination LIKE ? and status='delayed' ORDER BY flighttime";
+        
+        try {
+            PreparedStatement st = ConnectionManager.getConnection().
+                                    prepareStatement(query);
+            st.setString(1, like);
+            st.setString(2, like);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 Flight f = new Flight();
@@ -58,6 +86,68 @@ public class DataAccess {
             e.printStackTrace();
         }
         return flght;
+    }
+    
+    public static List<Flight> showSearchAdmin(String like){
+        List<Flight> flght = new ArrayList<Flight>();
+        String query = "SELECT * FROM flight WHERE destination LIKE ? ORDER BY flighttime";
+        
+        try {
+            PreparedStatement st = ConnectionManager.getConnection().
+                                    prepareStatement(query);
+            st.setString(1, like);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Flight f = new Flight();
+                f.setFlightCode(rs.getString(1));
+                f.setPlaneCode(rs.getString(2));
+                f.setPlaneName(rs.getString(3));
+                f.setDestination(rs.getString(4));
+                f.setFlightTime(rs.getString(5));
+                f.setStatus(rs.getString(6));
+                f.setPrice(rs.getInt(7));
+                flght.add(f);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flght;
+    }
+    
+    public static Timestamp selectingNearestFlight(){
+        Timestamp date = null;
+        Calendar time=Calendar.getInstance();
+        String query = "SELECT flighttime FROM flight WHERE status = 'ready' or status = 'delayed' ORDER BY flighttime";
+        try {
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            date=rs.getTimestamp(1);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+    
+    public static void TakeOff(){
+        String query = "SELECT code FROM flight WHERE status = 'ready' or status = 'delayed' ORDER BY flighttime";
+        String code = new String();
+        try {
+            PreparedStatement st = ConnectionManager.getConnection().prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            code = rs.getString(1);
+            
+            String query2 = "UPDATE flight SET status='take_off' WHERE code=?";
+            PreparedStatement st2 = ConnectionManager.getConnection().prepareStatement(query2);
+            st2.setString(1, code);
+            st2.execute();
+            //JOptionPane.showMessageDialog(null, "The flight "+code+" has taken off!");
+            System.out.println("The flight "+code+" has taken off!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public static void cancel(String flightId){

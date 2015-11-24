@@ -125,7 +125,7 @@ public class Add extends JFrame{
 //        this part set the frame
         setResizable(false);
         setSize(base.getSize());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         add(base);
     }
