@@ -38,7 +38,6 @@ public class AdminPage extends JFrame{
     public AdminPage(){
         setTitle("Admin");
         
-<<<<<<< HEAD
         Gui.CountDown hitung = LogIn.getHitung();
         
         hitung.setBounds(500, 450, 360, 20);
@@ -59,11 +58,6 @@ public class AdminPage extends JFrame{
         });
         
         bpostpone.setBounds(8, 405, 90, 30);
-=======
-        badd.setBounds(8, 8, 75, 20);
-        bsearch.setBounds(208-4+5, 8, 75, 20);
-        bpostpone.setBounds(8, 405, 90+20, 20);
->>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
         
         bpostpone.addActionListener(new ActionListener() {
 
@@ -101,11 +95,7 @@ public class AdminPage extends JFrame{
             }
         });
         
-<<<<<<< HEAD
         search.setBounds(86,8,210,20);
-=======
-        search.setBounds(86+5,8,110,20);
->>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
         
         spTable = new JScrollPane(table);
         spTable.setBounds(30, 58, 830, 300);
@@ -114,7 +104,7 @@ public class AdminPage extends JFrame{
         table.getSelectedRow();
         
         logout.add(blogout);
-        logout.setBounds(805, 8, 80, 20);
+        logout.setBounds(795, 8, 80, 30);
         blogout.addActionListener(new ActionListener() {
             // logout button action
             @Override
@@ -152,7 +142,7 @@ public class AdminPage extends JFrame{
             }
         });
         
-        bcancel.setBounds(106+20, 405, 110, 20);       
+        bcancel.setBounds(106, 405, 120, 30);       
         base.setSize(900, 500);
         base.add(logout);
         base.add(badd);
@@ -170,9 +160,9 @@ public class AdminPage extends JFrame{
         setVisible(true);
     }
     
-    public static void main(String[] args) {
-        new AdminPage();
-    }
+//    public static void main(String[] args) {
+//        new AdminPage();
+//    }
     
     private void showTable(List<Flight> listFlight){
         

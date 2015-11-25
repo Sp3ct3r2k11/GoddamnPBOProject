@@ -49,13 +49,9 @@ public class CurrentFlight extends JFrame{
         JLabel flightTime = new JLabel("Flight Time : \t"+flight.getFlightTime());
         flightTime.setBounds(8,108,250,20);
         JLabel status = new JLabel("Status : \t"+flight.getStatus());
-<<<<<<< HEAD
         status.setBounds(8,108+25,250,20);
-=======
-        status.setBounds(8,108+(108-83),250,20);
->>>>>>> 83cd4b4cb31dfae454d023423acf4665ec94925f
         JLabel price = new JLabel("Price : \t"+flight.getPrice());
-        price.setBounds(8,161+(108-83)*2,250,20);
+        price.setBounds(8,161,250,20);
         
         base.add(flightCode);
         base.add(planeCode);
@@ -67,7 +63,7 @@ public class CurrentFlight extends JFrame{
               
 //        This part create the register button
         bOke = new JButton("OK");
-        bOke.setBounds(8+8, 195, 110, 20);
+        bOke.setBounds(80-50, 195, 70, 20);
         
         bOke.addActionListener(new ActionListener() {
 
@@ -79,7 +75,7 @@ public class CurrentFlight extends JFrame{
         });
         
         bcancel = new JButton("Cancel Flight");
-        bcancel.setBounds(80-50+110, 195, 100+10, 20);
+        bcancel.setBounds(80-50+70+8, 195, 100+20, 20);
         
         bcancel.addActionListener(new ActionListener() {
 
@@ -110,9 +106,9 @@ public class CurrentFlight extends JFrame{
         add(base);
     }
     
-    public static void main(String[] args) {
-        new CurrentFlight();
-    }
+//    public static void main(String[] args) {
+//        new CurrentFlight();
+//    }
     
     public static void getFlight(String a,String b, String c, String d, String e, String f, int g){
         flight = new Flight();
